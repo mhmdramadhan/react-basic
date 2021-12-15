@@ -1,13 +1,16 @@
+import React, { useState } from 'react';
+
 import './ExpenseItem.css';
 import Card from '../UI/Card';
 import ExpenseDate from './ExpenseDate';
 // props adalah data/properti yang dikirimkan dari parent component ini
 const ExpenseItem = (props) => {
-  const expenseTitle = props.title;
-  const expenseAmount = props.amount;
+  // fungsi untuk membaca jika ada perubahan pada data
+  const [expenseTitle, setExpenseTitle] = useState(props.title);
 
+  // event listener update
   const clickHandler = () => {
-    console.log('cliked!!');
+    setExpenseTitle('Updated!');
   };
 
   return (
@@ -16,7 +19,7 @@ const ExpenseItem = (props) => {
       <ExpenseDate date={props.date} />
       <div className="expense-item__description">
         <h2>{expenseTitle}</h2>
-        <div className="expense-item__price">${expenseAmount}</div>
+        <div className="expense-item__price">${props.amount}</div>
       </div>
       <button onClick={clickHandler}>Change title</button>
     </Card>
