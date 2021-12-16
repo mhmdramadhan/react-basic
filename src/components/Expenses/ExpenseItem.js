@@ -6,6 +6,8 @@ import ExpenseDate from './ExpenseDate';
 // props adalah data/properti yang dikirimkan dari parent component ini
 const ExpenseItem = (props) => {
   // fungsi untuk membaca jika ada perubahan pada data
+  //expenseTitle properti awal
+  //setExpenseTitle properti yang akan digunakan untuk perubahan
   const [expenseTitle, setExpenseTitle] = useState(props.title);
 
   // event listener update
