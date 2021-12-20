@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './ExpenseItem.css';
 import Card from '../UI/Card';
@@ -8,23 +8,24 @@ const ExpenseItem = (props) => {
   // fungsi untuk membaca jika ada perubahan pada data
   //expenseTitle properti awal
   //setExpenseTitle properti yang akan digunakan untuk perubahan
-  const [expenseTitle, setExpenseTitle] = useState(props.title);
+  // const [expenseTitle, setExpenseTitle] = useState(props.title);
 
   // event listener update
-  const clickHandler = () => {
-    setExpenseTitle('Updated!');
-  };
+  // const clickHandler = () => {
+  //   setExpenseTitle('Updated!');
+  // };
 
   return (
-    // menempelkan isian component dari Card.js
-    <Card className="expense-item">
-      <ExpenseDate date={props.date} />
-      <div className="expense-item__description">
-        <h2>{expenseTitle}</h2>
-        <div className="expense-item__price">${props.amount}</div>
-      </div>
-      <button onClick={clickHandler}>Change title</button>
-    </Card>
+    <li>
+      {/* // menempelkan isian component dari Card.js */}
+      <Card className="expense-item">
+        <ExpenseDate date={props.date} />
+        <div className="expense-item__description">
+          <h2>{props.title}</h2>
+          <div className="expense-item__price">${props.amount}</div>
+        </div>
+      </Card>
+    </li>
   );
 };
 

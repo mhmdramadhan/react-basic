@@ -1,33 +1,80 @@
-import ExpenseItem from './ExpenseItem';
+import React, { useState } from 'react';
+
 import Card from '../UI/Card';
-import './Expenses.css'
+import './Expenses.css';
+import ExpensesFilter from './ExpenseFilter';
+import ExpensesList from './ExpensesList';
 
 const Expenses = (props) => {
+  // default value untuk filter 2020
+  const [filteredYear, setFilteredYear] = useState('2020');
+
+  const filterChangeHandler = (selectedYear) => {
+    setFilteredYear(selectedYear);
+  };
+
+  // membuat fungsi filter
+  const filteredExpenses = props.items.filter((alias) => {
+    return alias.date.getFullYear().toString() === filteredYear;
+  });
+
+  // cek if else
+  // let expensesContent = <p>No expenses found.</p>;
+  // if (props.items.length > 0) {
+  //   expensesContent = props.items.map((alias) => (
+  //     <ExpenseItem
+  //       key={alias.id}
+  //       title={alias.title}
+  //       amount={alias.amount}
+  //       date={alias.date}
+  //     />
+  //   ));
+  // }
+
   return (
-    <Card className="expenses">
-      {/* mengirim data props/properti ke child komponent */}
-      <ExpenseItem
-        title={props.items[0].title}
-        amount={props.items[0].amount}
-        date={props.items[0].date}
-      />
-      <ExpenseItem
-        title={props.items[1].title}
-        amount={props.items[1].amount}
-        date={props.items[1].date}
-      />
-      <ExpenseItem
-        title={props.items[2].title}
-        amount={props.items[2].amount}
-        date={props.items[2].date}
-      />
-      <ExpenseItem
-        title={props.items[3].title}
-        amount={props.items[3].amount}
-        date={props.items[3].date}
-      />
-    </Card>
+    <div>
+      <Card className="expenses">
+        <ExpensesFilter
+          selected={filteredYear}
+          onChangeFilter={filterChangeHandler}
+        />
+        {/* foreach data mengunakan map | key untuk menentukan data uniq per component */}
+        {/* tidak mengunakan filter */}
+
+        {/* {props.items.map((alias) => (
+         <ExpenseItem
+              key={alias.id}
+              title={alias.title}
+              amount={alias.amount}
+              date={alias.date}
+            />
+        ))}; */}
+
+        {/* mengunakan fungsi filter */}
+        {/* untuk if bisa mengunakan ternary if atau seperti dibawah */}
+
+        {/* {filteredExpenses.length === 0 && <p>No expenses found.</p>}
+        {filteredExpenses.length > 0 &&
+          filteredExpenses.map((alias) => (
+            <ExpenseItem
+              key={alias.id}
+              title={alias.title}
+              amount={alias.amount}
+              date={alias.date}
+            />
+          ))} */}
+
+        {/* mengunakan pemanggilan diluar return */}
+
+        {/* {expensesContent} */}
+
+        {/* mengunakan komponen */}
+        <ExpensesList items={filteredExpenses} />
+
+        {/* mengirim title amount date props/properti ke child komponent */}
+      </Card>
+    </div>
   );
-}
+};
 
 export default Expenses;
